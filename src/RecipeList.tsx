@@ -6,13 +6,23 @@ import { Recipe } from './types/Recipe';
 function RecipeList(): React.ReactElement {
   const [headline] = useState<string>('Rezeptliste');
 
-  const [recipes] = useState<Recipe[]>(initRecipes);
+  const [recipes, setRecipes] = useState<Recipe[]>(initRecipes);
+
+  function handleDelete(id: number) {
+    setRecipes((prevRecipes) => {
+      return prevRecipes.filter((recipe) => recipe.id !== id);
+    });
+  }
 
   return (
     <div>
       <h1>{headline}</h1>
       {recipes.map((recipe) => (
-        <RecipeListItem recipe={recipe} key={recipe.id} />
+        <RecipeListItem
+          recipe={recipe}
+          key={recipe.id}
+          onDelete={handleDelete}
+        />
       ))}
     </div>
   );
