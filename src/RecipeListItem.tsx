@@ -1,9 +1,11 @@
 import React from 'react';
+import { Recipe } from './types/Recipe';
 
-function RecipeListItem(): React.ReactElement {
-  const recipe = {
-    title: 'Schnitzel',
-  };
+type Props = {
+  recipe: Recipe;
+};
+
+function RecipeListItem({ recipe }: Props): React.ReactElement {
   return (
     <div>
       <div>
