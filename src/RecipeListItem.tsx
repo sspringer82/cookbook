@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Recipe } from './types/Recipe';
 
 type Props = {
@@ -7,6 +7,12 @@ type Props = {
 };
 
 function RecipeListItem({ recipe, onDelete }: Props): React.ReactElement {
+  useEffect(() => {
+    return () => {
+      console.log('Component mit der ID ', recipe.id, ' wurde entfernt');
+    };
+  }, [recipe.id]);
+
   return (
     <div>
       <div>
