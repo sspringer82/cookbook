@@ -18,10 +18,16 @@ function RecipeList(): React.ReactElement {
     fetchData();
   }, []);
 
-  function handleDelete(id: number) {
-    setRecipes((prevRecipes) => {
-      return prevRecipes.filter((recipe) => recipe.id !== id);
-    });
+  async function handleDelete(id: number) {
+    try {
+      await axios.delete('http://localhost:3001/recipe/' + id);
+      setRecipes((prevRecipes) => {
+        return prevRecipes.filter((recipe) => recipe.id !== id);
+      });
+    } catch (e) {
+      console.error('Beim Löschen ist ein Fehler aufgetreten', e);
+      alert('Es ist ein Fehler aufgetreten');
+    }
   }
 
   return (
