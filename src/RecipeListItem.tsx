@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Recipe } from './types/Recipe';
 import styles from './RecipeListItem.module.css';
-import classNames from 'classnames';
 
 type Props = {
   recipe: Recipe;
@@ -14,11 +13,6 @@ function RecipeListItem({ recipe, onDelete }: Props): React.ReactElement {
       console.log('Component mit der ID ', recipe.id, ' wurde entfernt');
     };
   }, [recipe.id]);
-
-  // let titleClasses = classNames({
-  //   Title: true,
-  //   Padding: true,
-  // });
 
   return (
     <div className={styles.row}>
