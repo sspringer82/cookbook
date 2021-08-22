@@ -1,0 +1,14 @@
+.RecipeListItemRow {
+  display: flex;
+  line-height: 40px;
+  margin: 0 20px;
+  box-shadow: 2px 2px 5px 0 rgba(150, 150, 150, 0.75);
+}
+
+.RecipeListItemTitle {
+  min-width: 200px;
+}
+
+.RecipeListItemPadding {
+  padding-left: 20px;
+}
