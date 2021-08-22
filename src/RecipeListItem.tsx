@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Recipe } from './types/Recipe';
-import './RecipeListItem.css';
+import styles from './RecipeListItem.module.css';
 import classNames from 'classnames';
 
 type Props = {
@@ -15,15 +15,15 @@ function RecipeListItem({ recipe, onDelete }: Props): React.ReactElement {
     };
   }, [recipe.id]);
 
-  let titleClasses = classNames({
-    RecipeListItemTitle: true,
-    RecipeListItemPadding: true,
-  });
+  // let titleClasses = classNames({
+  //   Title: true,
+  //   Padding: true,
+  // });
 
   return (
-    <div className="RecipeListItemRow">
-      <div className={titleClasses}>{recipe.title}</div>
-      <div className="RecipeListItemButton RecipeListItemPadding">
+    <div className={styles.row}>
+      <div className={styles.title}>{recipe.title}</div>
+      <div className={styles.padding}>
         <button
           onClick={() => {
             onDelete(recipe.id);

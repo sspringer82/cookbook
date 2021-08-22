@@ -1,0 +1,14 @@
+.row {
+  display: flex;
+  line-height: 40px;
+  margin: 0 20px;
+  box-shadow: 2px 2px 5px 0 rgba(150, 150, 150, 0.75);
+}
+
+.title {
+  min-width: 200px;
+}
+
+.padding {
+  padding-left: 20px;
+}
