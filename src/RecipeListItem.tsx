@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Recipe } from './types/Recipe';
 import { Padding, Row, Title } from './RecipeListItem.styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import { darkModeContext } from './darkModeContext';
 
 type Props = {
   recipe: Recipe;
@@ -10,6 +11,8 @@ type Props = {
 };
 
 function RecipeListItem({ recipe, onDelete }: Props): React.ReactElement {
+  const [darkMode] = useContext(darkModeContext);
+
   useEffect(() => {
     return () => {
       console.log('Component mit der ID ', recipe.id, ' wurde entfernt');
@@ -18,8 +21,8 @@ function RecipeListItem({ recipe, onDelete }: Props): React.ReactElement {
 
   return (
     <Row>
-      <Title>{recipe.title}</Title>
-      <Padding>
+      <Title darkMode={darkMode}>{recipe.title}</Title>
+      <Padding darkMode={darkMode}>
         <IconButton
           aria-label="delete"
           onClick={() => {
