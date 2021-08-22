@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Recipe } from './types/Recipe';
-import styles from './RecipeListItem.module.css';
+import { Padding, Row, Title } from './RecipeListItem.styles';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 type Props = {
   recipe: Recipe;
@@ -15,18 +17,19 @@ function RecipeListItem({ recipe, onDelete }: Props): React.ReactElement {
   }, [recipe.id]);
 
   return (
-    <div className={styles.row}>
-      <div className={styles.title}>{recipe.title}</div>
-      <div className={styles.padding}>
-        <button
+    <Row>
+      <Title>{recipe.title}</Title>
+      <Padding>
+        <IconButton
+          aria-label="delete"
           onClick={() => {
             onDelete(recipe.id);
           }}
         >
-          löschen
-        </button>
-      </div>
-    </div>
+          <DeleteIcon />
+        </IconButton>
+      </Padding>
+    </Row>
   );
 }
 
