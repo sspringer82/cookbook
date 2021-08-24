@@ -1,6 +1,8 @@
 import { Button, TextField } from '@material-ui/core';
-import React, { ChangeEvent, useState } from 'react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import React from 'react';
 import { Recipe } from './types/Recipe';
+import validationSchema from './validationSchema';
 
 type RecipeFormContent = {
   title: string;
@@ -39,15 +41,7 @@ type Props = {
 };
 
 function RecipeForm({ onSave }: Props): React.ReactElement {
-  const [data, setData] = useState<RecipeFormContent>(initialContent);
-
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    const name = event.currentTarget.name;
-    const value = event.currentTarget.value;
-    setData((prevData) => ({ ...prevData, [name]: value }));
-  }
-
-  async function handleSubmit() {
+  async function handleSubmit(data: RecipeFormContent) {
     const recipeData: Omit<Recipe, 'id'> = {
       title: data.title,
       ingredients: [
@@ -70,129 +64,139 @@ function RecipeForm({ onSave }: Props): React.ReactElement {
       steps: [data.step1, data.step2, data.step3],
     };
     await onSave(recipeData);
-    setData(initialContent);
   }
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit();
+    <Formik
+      validationSchema={validationSchema}
+      initialValues={initialContent}
+      onSubmit={async (values, action) => {
+        await handleSubmit(values);
+        action.setSubmitting(false);
+        action.resetForm();
       }}
     >
-      <h1>Form works</h1>
-      <div>
-        <TextField
-          label="Titel"
-          type="text"
-          name="title"
-          value={data.title}
-          onChange={handleChange}
-        />
-      </div>
-      <h2>Zutaten</h2>
-      {/* Ingredient 1 */}
-      <div>
-        <TextField
-          label="Zutat"
-          type="text"
-          name="ingredient1title"
-          value={data.ingredient1title}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Menge"
-          type="text"
-          name="ingredient1amount"
-          value={data.ingredient1amount}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Einheit"
-          type="text"
-          name="ingredient1unit"
-          value={data.ingredient1unit}
-          onChange={handleChange}
-        />
-      </div>
-      {/* Ingredient 2 */}
-      <div>
-        <TextField
-          label="Zutat"
-          type="text"
-          name="ingredient2title"
-          value={data.ingredient2title}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Menge"
-          type="text"
-          name="ingredient2amount"
-          value={data.ingredient2amount}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Einheit"
-          type="text"
-          name="ingredient2unit"
-          value={data.ingredient2unit}
-          onChange={handleChange}
-        />
-      </div>
-      {/* Ingredient 3 */}
-      <div>
-        <TextField
-          label="Zutat"
-          type="text"
-          name="ingredient3title"
-          value={data.ingredient3title}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Menge"
-          type="text"
-          name="ingredient3amount"
-          value={data.ingredient3amount}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Einheit"
-          type="text"
-          name="ingredient3unit"
-          value={data.ingredient3unit}
-          onChange={handleChange}
-        />
-      </div>
-      <h2>Zubereitungsschritte</h2>
-      <div>
-        <TextField
-          label="Schritt"
-          type="text"
-          name="step1"
-          value={data.step1}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <TextField
-          label="Schritt"
-          type="text"
-          name="step2"
-          value={data.step2}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <TextField
-          label="Schritt"
-          type="text"
-          name="step3"
-          value={data.step3}
-          onChange={handleChange}
-        />
-      </div>
-      <Button type="submit">speichern</Button>
-    </form>
+      {() => {
+        return (
+          <Form>
+            <h1>Form works</h1>
+            <div>
+              <Field name="title">
+                {({ field, meta }: any) => (
+                  <TextField
+                    label="Titel"
+                    type="text"
+                    {...field}
+                    error={!!(meta.touch && meta.error)}
+                  />
+                )}
+              </Field>
+              <ErrorMessage name="title" />
+            </div>
+            <h2>Zutaten</h2>
+            {/* Ingredient 1 */}
+            <div style={{ display: 'flex' }}>
+              <Field name="ingredient1title">
+                {({ field }: any) => (
+                  <TextField label="Zutat" type="text" {...field} />
+                )}
+              </Field>
+              <div>
+                <Field name="ingredient1amount">
+                  {({ field, meta }: any) => (
+                    <TextField
+                      label="Menge"
+                      type="text"
+                      {...field}
+                      error={!!(meta.touch && meta.error)}
+                    />
+                  )}
+                </Field>
+                <br />
+                <ErrorMessage name="ingredient1amount" />
+              </div>
+              <Field name="ingredient1unit">
+                {({ field }: any) => (
+                  <TextField label="Einheit" type="text" {...field} />
+                )}
+              </Field>
+            </div>
+            {/* Ingredient 2 */}
+            <div>
+              <Field name="ingredient2title">
+                {({ field }: any) => (
+                  <TextField label="Zutat" type="text" {...field} />
+                )}
+              </Field>
+              <Field name="ingredient2amount">
+                {({ field, meta }: any) => (
+                  <TextField
+                    label="Menge"
+                    type="text"
+                    {...field}
+                    error={!!(meta.touch && meta.error)}
+                  />
+                )}
+              </Field>
+              <ErrorMessage name="ingredient2amount" />
+              <Field name="ingredient2unit">
+                {({ field }: any) => (
+                  <TextField label="Einheit" type="text" {...field} />
+                )}
+              </Field>
+            </div>
+            {/* Ingredient 3 */}
+            <div>
+              <Field name="ingredient3title">
+                {({ field }: any) => (
+                  <TextField label="Zutat" type="text" {...field} />
+                )}
+              </Field>
+
+              <Field name="ingredient3amount">
+                {({ field, meta }: any) => (
+                  <TextField
+                    label="Menge"
+                    type="text"
+                    {...field}
+                    error={!!(meta.touch && meta.error)}
+                  />
+                )}
+              </Field>
+              <ErrorMessage name="ingredient3amount" />
+              <Field name="ingredient3unit">
+                {({ field }: any) => (
+                  <TextField label="Einheit" type="text" {...field} />
+                )}
+              </Field>
+            </div>
+            <h2>Zubereitungsschritte</h2>
+            <div>
+              <Field name="step1">
+                {({ field }: any) => (
+                  <TextField label="Schritt" type="text" {...field} />
+                )}
+              </Field>
+            </div>
+            <div>
+              <Field name="step2">
+                {({ field }: any) => (
+                  <TextField label="Schritt" type="text" {...field} />
+                )}
+              </Field>
+            </div>
+            <div>
+              <Field name="step3">
+                {({ field }: any) => (
+                  <TextField label="Schritt" type="text" {...field} />
+                )}
+              </Field>
+            </div>
+            <Button type="submit">speichern</Button>
+          </Form>
+        );
+      }}
+    </Formik>
   );
 }
 
