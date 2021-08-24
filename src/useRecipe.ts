@@ -27,9 +27,15 @@ function useRecipe() {
     }
   }
 
+  async function handleSave(recipe: Omit<Recipe, 'id'>): Promise<void> {
+    const { data } = await axios.post('http://localhost:3001/recipe/', recipe);
+    setRecipes((prevRecipes) => [...prevRecipes, data]);
+  }
+
   return {
     recipes,
     handleDelete,
+    handleSave,
   };
 }
 

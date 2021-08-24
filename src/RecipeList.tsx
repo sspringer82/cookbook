@@ -3,11 +3,12 @@ import RecipeListItem from './RecipeListItem';
 
 import './RecipeList.css';
 import useRecipe from './useRecipe';
+import RecipeForm from './RecipeForm';
 
 function RecipeList(): React.ReactElement {
   const [headline] = useState<string>('Rezeptliste');
 
-  const { recipes, handleDelete } = useRecipe();
+  const { recipes, handleDelete, handleSave } = useRecipe();
 
   return (
     <div>
@@ -19,6 +20,8 @@ function RecipeList(): React.ReactElement {
           onDelete={handleDelete}
         />
       ))}
+      <hr />
+      <RecipeForm onSave={handleSave} />
     </div>
   );
 }
