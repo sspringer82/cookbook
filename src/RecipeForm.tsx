@@ -1,6 +1,6 @@
 import { Button, TextField } from '@material-ui/core';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Recipe } from './types/Recipe';
 import validationSchema from './validationSchema';
 
@@ -41,6 +41,12 @@ type Props = {
 };
 
 function RecipeForm({ onSave }: Props): React.ReactElement {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   async function handleSubmit(data: RecipeFormContent) {
     const recipeData: Omit<Recipe, 'id'> = {
       title: data.title,
@@ -88,6 +94,7 @@ function RecipeForm({ onSave }: Props): React.ReactElement {
                     type="text"
                     {...field}
                     error={!!(meta.touch && meta.error)}
+                    inputRef={inputRef}
                   />
                 )}
               </Field>
