@@ -28,7 +28,25 @@ function useRecipe() {
   }
 
   async function handleSave(recipe: Omit<Recipe, 'id'>): Promise<void> {
-    const { data } = await axios.post('http://localhost:3001/recipe/', recipe);
+    const formData = new FormData();
+    formData.append('title', recipe.title);
+    formData.append('ingredients', JSON.stringify(recipe.ingredients[0]));
+    formData.append('ingredients', JSON.stringify(recipe.ingredients[1]));
+    formData.append('ingredients', JSON.stringify(recipe.ingredients[2]));
+    formData.append('steps', recipe.steps[0]);
+    formData.append('steps', recipe.steps[1]);
+    formData.append('steps', recipe.steps[2]);
+    if (recipe.image) {
+      formData.append('image', recipe.image);
+    }
+
+    const { data } = await axios.post(
+      'http://localhost:3001/recipe/',
+      formData,
+      {
+        headers: { 'content-type': 'multipart/form-data' },
+      },
+    );
     setRecipes((prevRecipes) => [...prevRecipes, data]);
   }
 

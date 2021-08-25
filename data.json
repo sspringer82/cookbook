@@ -41,58 +41,6 @@
         "braten"
       ],
       "rating": 5
-    },
-    {
-      "title": "Schweinebraten",
-      "ingredients": [
-        {
-          "title": "Schweinebraten",
-          "amount": 1,
-          "unit": "kg"
-        },
-        {
-          "title": "",
-          "amount": null,
-          "unit": ""
-        },
-        {
-          "title": "",
-          "amount": null,
-          "unit": ""
-        }
-      ],
-      "steps": [
-        "Braten",
-        "",
-        ""
-      ],
-      "id": 3
-    },
-    {
-      "title": "Kartoffelsuppe",
-      "ingredients": [
-        {
-          "title": "Kartoffeln",
-          "amount": 1,
-          "unit": "kg"
-        },
-        {
-          "title": "Wasser",
-          "amount": 1,
-          "unit": "l"
-        },
-        {
-          "title": "",
-          "amount": null,
-          "unit": ""
-        }
-      ],
-      "steps": [
-        "Schälen",
-        "In den Topf",
-        "Fertig"
-      ],
-      "id": 4
     }
   ]
 }

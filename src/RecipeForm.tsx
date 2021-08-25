@@ -18,6 +18,7 @@ type RecipeFormContent = {
   step1: string;
   step2: string;
   step3: string;
+  image?: any;
 };
 
 const initialContent = {
@@ -68,6 +69,7 @@ function RecipeForm({ onSave }: Props): React.ReactElement {
         },
       ],
       steps: [data.step1, data.step2, data.step3],
+      image: data.image,
     };
     await onSave(recipeData);
   }
@@ -82,7 +84,7 @@ function RecipeForm({ onSave }: Props): React.ReactElement {
         action.resetForm();
       }}
     >
-      {() => {
+      {({ setFieldValue }) => {
         return (
           <Form>
             <h1>Form works</h1>
@@ -100,6 +102,17 @@ function RecipeForm({ onSave }: Props): React.ReactElement {
               </Field>
               <ErrorMessage name="title" />
             </div>
+
+            <div>
+              <label>Bild</label>
+              <input
+                type="file"
+                onChange={(event) =>
+                  setFieldValue('image', event.currentTarget.files![0])
+                }
+              />
+            </div>
+
             <h2>Zutaten</h2>
             {/* Ingredient 1 */}
             <div style={{ display: 'flex' }}>
