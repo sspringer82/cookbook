@@ -3,6 +3,7 @@ import './App.css';
 import DarkModeButton from './DarkModeButton';
 import { darkModeContext } from './darkModeContext';
 import RecipeList from './RecipeList';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(false);
@@ -10,7 +11,21 @@ function App() {
   return (
     <darkModeContext.Provider value={[darkMode, setDarkMode]}>
       <DarkModeButton />
-      <RecipeList />
+      <Router>
+        <Switch>
+          <Route path="/" exact component={RecipeList} />
+          <Route
+            path="/"
+            render={() => {
+              return (
+                <div>
+                  Ungültiger Pfad. <Link to="/">Starte hier</Link>
+                </div>
+              );
+            }}
+          />
+        </Switch>
+      </Router>
     </darkModeContext.Provider>
   );
 }
