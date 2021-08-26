@@ -11,6 +11,7 @@ function App() {
 
   return (
     <darkModeContext.Provider value={[darkMode, setDarkMode]}>
+      <h1>Mein Kochbuch</h1>
       <DarkModeButton />
       <Router>
         <Switch>

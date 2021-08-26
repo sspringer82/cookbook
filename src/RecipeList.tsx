@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RecipeListItem from './RecipeListItem';
 
 import './RecipeList.css';
@@ -10,13 +10,11 @@ import { Recipe } from './types/Recipe';
 
 function RecipeList(): React.ReactElement {
   const history = useHistory();
-  const [headline] = useState<string>('Rezeptliste');
 
   const { recipes, handleDelete, handleSave } = useRecipe();
 
   return (
     <div>
-      <h1 className="headline">{headline}</h1>
       {recipes.map((recipe) => (
         <RecipeListItem
           recipe={recipe}
