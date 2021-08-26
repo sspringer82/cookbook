@@ -14,11 +14,11 @@ type Props = {
 function RecipeListItem({ recipe, onDelete }: Props): React.ReactElement {
   const [darkMode] = useContext(darkModeContext);
 
-  useEffect(() => {
-    return () => {
-      console.log('Component mit der ID ', recipe.id, ' wurde entfernt');
-    };
-  }, [recipe.id]);
+  // useEffect(() => {
+  //   return () => {
+  //     console.log('Component mit der ID ', recipe.id, ' wurde entfernt');
+  //   };
+  // }, [recipe.id]);
 
   return (
     <Row>
