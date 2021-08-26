@@ -22,7 +22,7 @@ function RecipeListItem({ recipe, onDelete }: Props): React.ReactElement {
 
   return (
     <Row>
-      <Title darkMode={darkMode}>
+      <Title darkMode={darkMode} data-testid="title">
         <Link to={`/detail/${recipe.id}`}>{recipe.title}</Link>
       </Title>
       <Padding darkMode={darkMode}>
@@ -31,6 +31,7 @@ function RecipeListItem({ recipe, onDelete }: Props): React.ReactElement {
           onClick={() => {
             onDelete(recipe.id);
           }}
+          data-testid="deleteButton"
         >
           <DeleteIcon />
         </IconButton>
