@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Recipe } from './types/Recipe';
 import { Padding, Row, Title } from './RecipeListItem.styles';
 import DeleteIcon from '@material-ui/icons/Delete';
