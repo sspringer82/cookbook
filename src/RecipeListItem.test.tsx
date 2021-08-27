@@ -34,4 +34,14 @@ describe('RecipeListItem', () => {
 
     expect(deleteSpy).toHaveBeenCalledWith(1);
   });
+
+  it('should match a snapshot', () => {
+    const { asFragment } = render(
+      <MemoryRouter>
+        <RecipeListItem recipe={recipe} onDelete={jest.fn()} />
+      </MemoryRouter>,
+    );
+
+    expect(asFragment()).toMatchSnapshot();
+  });
 });
