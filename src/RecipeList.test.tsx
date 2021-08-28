@@ -30,7 +30,7 @@ describe('RecipeList', () => {
 
   beforeEach(() => {
     mock = new MockAdapter(axios);
-    mock.onGet('http://localhost:3001/recipe').reply(200, testData);
+    mock.onGet(`${process.env.REACT_APP_BACKEND}recipe`).reply(200, testData);
   });
 
   afterEach(() => {

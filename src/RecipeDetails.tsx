@@ -12,7 +12,9 @@ function RecipeDetails(): React.ReactElement {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await axios.get(`http://localhost:3001/recipe/${id}`);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BACKEND}recipe/${id}`,
+      );
       setRecipe(data);
     }
     fetchData();

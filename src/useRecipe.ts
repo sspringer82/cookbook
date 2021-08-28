@@ -8,7 +8,7 @@ function useRecipe() {
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get<Recipe[]>(
-        'http://localhost:3001/recipe',
+        `${process.env.REACT_APP_BACKEND}recipe`,
       );
       setRecipes(data);
     }
@@ -17,7 +17,7 @@ function useRecipe() {
 
   async function handleDelete(id: number) {
     try {
-      await axios.delete('http://localhost:3001/recipe/' + id);
+      await axios.delete(`${process.env.REACT_APP_BACKEND}recipe/${id}`);
       setRecipes((prevRecipes) => {
         return prevRecipes.filter((recipe) => recipe.id !== id);
       });
@@ -41,7 +41,7 @@ function useRecipe() {
     }
 
     const { data } = await axios.post(
-      'http://localhost:3001/recipe/',
+      `${process.env.REACT_APP_BACKEND}recipe`,
       formData,
       {
         headers: { 'content-type': 'multipart/form-data' },
