@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import DarkModeButton from './DarkModeButton';
 import { darkModeContext } from './darkModeContext';
-import RecipeList from './RecipeList.class';
+import RecipeList from './RecipeList';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import RecipeDetails from './RecipeDetails';
 
